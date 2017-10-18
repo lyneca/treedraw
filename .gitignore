@@ -1,0 +1,6 @@
+*.pyc
+*.swo
+*.swp
+build
+*/__pycache__
+dist
