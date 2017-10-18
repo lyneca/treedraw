@@ -6,7 +6,7 @@ setup(
     url='https://github.com/lyneca/treedraw',
     author='lyneca',
     license='MIT',
-    version='1.0.0',
+    version='1.0.1',
     packages=['treedraw'],
     install_requires=[
         'pycairo'
