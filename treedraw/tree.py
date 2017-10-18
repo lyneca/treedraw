@@ -6,6 +6,7 @@ class Tree:
     """
     def __init__(self):
         self.root = None
+        self.children = 0
         self.symbols = {}
         self.links = {}
         self.width = 1
@@ -34,8 +35,6 @@ class Tree:
         """
         if parent in self.links:
             warning("symbol {} already linked".format(parent))
-        self.update_width()
-        self.update_height()
         self.links[parent] = children
 
     def update_width(self):
@@ -61,6 +60,9 @@ class Tree:
     def check(self):
         if not self.root:
             error("tree has no root set")
+        for parent in self.links:
+            if len(self.links[parent]) < self.children:
+                self.links[parent] += [' '] * (self.children - len(self.links[parent]))
         self.update_width()
         self.update_height()
     
@@ -69,8 +71,8 @@ class Tree:
         if all([x == ' ' for x in parents]):
             return parents
         for parent in parents:
-            if parent == ' ':
-                line += [' ', ' ']
+            if parent == ' ' and self.children == 0:
+                line += [' '] * self.children
             elif parent in self.links:  # if parent has children
                 line += self.links[parent]
             else:
@@ -81,7 +83,7 @@ class Tree:
         return [self.symbols[s] for s in symbols]
 
     def print_levels(self):
-        print(self.symbols[self.root])
+        rint(self.symbols[self.root])
         next_line = self.get_children([self.root])
         print(' '.join(self.get_values(next_line)))
         while next_line:
