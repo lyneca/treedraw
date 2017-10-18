@@ -1,5 +1,5 @@
-from tree import Tree
-from util import error, warning
+from .tree import Tree
+from .util import error, warning
 import sys
 import re
 
@@ -15,7 +15,7 @@ class Parser:
         self.file = f
 
         self.def_regex = re.compile(r'^\w+\s*:\s*.+$')
-        self.child_regex = re.compile(r'^\w+\s*>\s*\w+(,\s*\w+)+$')
+        self.child_regex = re.compile(r'^\w+\s*>\s*\w+(,\s*\w+)*$')
 
         self.tree = Tree()
 

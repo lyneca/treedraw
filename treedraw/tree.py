@@ -1,4 +1,4 @@
-from util import warning
+from .util import warning
 
 class Tree:
     """
@@ -8,6 +8,8 @@ class Tree:
         self.root = None
         self.symbols = {}
         self.links = {}
+        self.width = 1
+        self.height = 1
 
     def set_root(self, symbol):
         self.root = symbol
@@ -32,7 +34,26 @@ class Tree:
         """
         if parent in self.links:
             warning("symbol {} already linked".format(parent))
+        self.update_width()
+        self.update_height()
         self.links[parent] = children
+
+    def update_width(self):
+        next_line = self.get_children([self.root])
+        w = 1
+        while not all([x == ' ' for x in next_line]):
+            if len(next_line) > w:
+                w = len(next_line)
+            next_line = self.get_children(next_line)
+        self.width = w
+
+    def update_height(self):
+        h = 1
+        next_line = self.get_children([self.root])
+        while not all([x == ' ' for x in next_line]):
+            h += 1
+            next_line = self.get_children(next_line)
+        self.height = h
 
     def exists(self, symbol):
         return symbol in self.symbols
@@ -40,12 +61,20 @@ class Tree:
     def check(self):
         if not self.root:
             error("tree has no root set")
+        self.update_width()
+        self.update_height()
     
     def get_children(self, parents):
         line = []
+        if all([x == ' ' for x in parents]):
+            return parents
         for parent in parents:
-            if parent in self.links:  # if parent has children
+            if parent == ' ':
+                line += [' ', ' ']
+            elif parent in self.links:  # if parent has children
                 line += self.links[parent]
+            else:
+                line += [' ', ' ']
         return line
     
     def get_values(self, symbols):
