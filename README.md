@@ -19,6 +19,11 @@ Defining node labels:
 label: value
 ```
 
+Specifying the number of children each node has (for spacing):
+```
+:: children [number of children]
+```
+
 Setting the root node of the tree:
 ```
 :: root [label]
