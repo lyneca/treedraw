@@ -15,7 +15,7 @@ class Parser:
         self.file = f
 
         self.def_regex = re.compile(r'^\w+\s*:\s*.+$')
-        self.child_regex = re.compile(r'^\w+\s*>\s*\w+(,\s*\w+)*$')
+        self.child_regex = re.compile(r'^\w+\s*>\s*\w*(,\s*\w*)*$')
 
         self.tree = Tree()
 
@@ -50,11 +50,15 @@ class Parser:
             self.syntax_error(line)
 
     def parse_special(self, line):
-        if line.split()[0] == 'root':
+        keyword = line.split()[0]
+        if keyword == 'root':
             symbol = line.split()[1]
             if not self.tree.exists(symbol):
                 warning("root symbol {} does not exist".format(symbol))
             self.tree.set_root(symbol)
+        elif keyword == 'children':
+            self.tree.children = 2
+        
 
     def parse_definition(self, line):
         symbol = line.split(':')[0].strip()
@@ -70,10 +74,13 @@ class Parser:
             return self.unknown_symbol(parent)
 
         children = line.split('>')[1].strip()
+
+        # Splits the string by commas and adds ' ' for each comma with nothing after it (for empty nodes in a tree)
         children = [x.strip() for x in children.split(',')]
+        children = [' ' if x == '' else x for x in children]  # ok_hand
 
         for child in children:
-            if not self.tree.exists(child):
+            if not self.tree.exists(child) and child is not ' ':
                 return self.unknown_symbol(child)
 
         self.tree.add_children(parent, children)       

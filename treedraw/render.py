@@ -95,6 +95,7 @@ class Renderer:
                 )
                 if child in tree.links:
                     for grandchild in tree.links[child]:
+                        if grandchild is ' ': continue
                         index = line_after.index(grandchild)
                         x_pos = gap_next + index * (box_width + gap_next) + box_width / 2
                         y_pos = GAP_TOP + (y + 1) * (box_height + gap_height)
