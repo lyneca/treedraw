@@ -5,9 +5,9 @@ Generate diagrams of trees from your text editor
 ## Usage
 ```
 $ pip install treedraw
-$ python -m treedraw [input file] [output file]
+$ treedraw [input file] [output file]
 ```
-See `python -m treedraw --help` for more options.
+See `treedraw --help` for more options.
 
 
 ## Language
