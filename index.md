@@ -29,3 +29,25 @@ label > label [, label ...]
 ```
 
 Semicolons are optional and can be used to chain together multiple expressions.
+
+## Examples
+
+### Balanced tree
+```
+a: 0
+b: 1
+c: 2
+d: 3
+e: 4
+f: 5
+g: 6
+
+:: root a
+
+a > b, c
+b > d, e
+c > f, g
+```
+
+![balanced tree diagram](balanced.png)
+
