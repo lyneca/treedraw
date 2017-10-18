@@ -1,0 +1,3 @@
+[console_scripts]
+treedraw = treedraw.__main__:main
+
