@@ -1,5 +1,5 @@
 # Treedraw
-Generate diagrams of trees from your text editor
+Generate diagrams of trees from your text editor.
 
 ![](https://img.shields.io/pypi/v/treedraw.svg)
 
@@ -29,7 +29,7 @@ Setting the root node of the tree:
 :: root [label]
 ```
 
-Defining children of a node
+Defining children of a node:
 ```
 label > label [, label ...]
 ```
